@@ -1,0 +1,16 @@
+.SideBar__option:hover{
+    background-color: whitesmoke;
+    cursor: pointer;
+    border-radius: 20px;
+
+}
+.sidebar__close{
+
+display: none;
+}
+.sidebar__open{
+/* transition: all 50ms ease; */
+display: flex;
+position: relative;
+top: 0px;
+}
