@@ -1,4 +1,4 @@
-import { Checkbox } from "@material-ui/core";
+import { Button, Checkbox } from "@material-ui/core";
 import React,{useEffect,useState} from "react";
 import Header from "./Header";
 import SinglePermesso from "./SinglePermesso";
@@ -6,7 +6,7 @@ function Gruppi() {
     const [dataSelect,setDataSelect]=useState([])
     const [selectedOption,setSelectedOption]=useState(0);
     const [permessiData,setPermessiData]=useState([]);
-    const [checked,setChecked]=useState(false);
+    const [selectedAll,setSelectedAll]=useState(false);
     useEffect(()=>{
         
         const url="http://localhost/WorkProject/Gruppi.php";
@@ -41,6 +41,16 @@ function Gruppi() {
     }
     
 
+    const changeSetAll=()=>{
+      setSelectedAll((pre)=>{
+        if(pre===false){
+          return true;
+        }else{
+          return false;
+        }
+
+      })
+    }
 
     
 
@@ -70,8 +80,8 @@ function Gruppi() {
           <div className="gestione__permessi flex justify-between">
              <label className="text-2xl">Gestisci i permessi</label>
                 <div className="select__all">
-                <p className=" text-xs">Select all</p>
-                <Checkbox  />
+                <p  className=" text-xs">Select all</p>
+                <Checkbox checked={selectedAll} onChange={changeSetAll}  />
                 </div>
                
           </div>
@@ -79,12 +89,15 @@ function Gruppi() {
         
         
        
-         return <SinglePermesso key={id} checkedData={data.boolean} title={data.res} />
+         return <SinglePermesso key={id} selectedAll={selectedAll} checkedData={data.boolean} title={data.res} />
         
           
     
         
        })} 
+      </div>
+      <div className="flex w-60 justify-end mt-2.5">
+        <Button className="text-white !important bg-purple-700 !important">Save</Button>
       </div>
     </div>
      {/*  {console.log(selectedOption)} */}
