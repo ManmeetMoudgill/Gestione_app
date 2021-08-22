@@ -1,10 +1,6 @@
 import { Checkbox} from '@material-ui/core'
 import React,{useState} from 'react'
 import {changePermessogruppi,changePermssoSedi,changePermessoSondaggio,changePermessoReport} from '../features/counterSlice';
-import {selectPermssogruppi} from '../features/counterSlice';
-import {selectPermssoSedi} from '../features/counterSlice';
-import {selectPermessoSondaggio} from '../features/counterSlice';
-import {selectPermessoReport} from '../features/counterSlice';
 
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -12,11 +8,7 @@ import { useSelector } from 'react-redux';
 function SinglePermesso({title}) {
 
 
-        /*Redux Data here  */
-        const gruppi=useSelector(selectPermssogruppi);
-        const sedi=useSelector(selectPermssoSedi);
-        const Asl=useSelector(selectPermessoSondaggio);
-        const report=useSelector(selectPermessoReport);
+    
 
         /* Dispatch */
         const dispatch=useDispatch();
@@ -25,12 +17,7 @@ function SinglePermesso({title}) {
     const [getDataChecked,setDataChecked]=useState(false);
     const [permessiSend,setSendPermessi]=useState({})
   
-  
-   /*  const [gruppo,setGruppo]=useState({});
- 
-    const [sondaggio,setSondaggio]=useState({});
-    const [analizza,setAnalizza]=useState({}); */
-    const [arrayData,setArrayData]=useState([]);
+
     
 
     

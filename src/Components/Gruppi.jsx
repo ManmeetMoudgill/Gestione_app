@@ -1,5 +1,10 @@
 import { Button, Checkbox } from "@material-ui/core";
 import React,{useEffect,useState} from "react";
+import { useSelector } from "react-redux";
+import {selectPermssogruppi} from '../features/counterSlice';
+ import {selectPermssoSedi} from '../features/counterSlice';
+ import {selectPermessoSondaggio} from '../features/counterSlice';
+ import {selectPermessoReport} from '../features/counterSlice';
 import Header from "./Header";
 import SinglePermesso from "./SinglePermesso";
 function Gruppi() {
@@ -8,7 +13,13 @@ function Gruppi() {
     const [permessiData,setPermessiData]=useState([]);
     const [selectedAll,setSelectedAll]=useState(false);
     const [dataArray,setDataArray]=useState([])
-   const [buttonPressed,SetButtonPressed]=useState(false);
+       /*Redux Data here  */
+       const gruppi=useSelector(selectPermssogruppi);
+       const sedi=useSelector(selectPermssoSedi);
+       const Asl=useSelector(selectPermessoSondaggio);
+       const report=useSelector(selectPermessoReport)
+
+  
     
    
     
@@ -29,16 +40,12 @@ function Gruppi() {
 
     const sendData=()=>{
     
-      SetButtonPressed((pre)=>{
-          if(pre===false){
-            return true
-          }else if(pre===true){
-            return false
-          }else {
-            return false;
-          }
-    
-        });
+      console.log(gruppi);
+      console.log(sedi);
+      console.log(Asl);
+      console.log(report);
+
+     
 
     }
 
@@ -82,7 +89,7 @@ function Gruppi() {
   return (
       <>
       <Header />
-    <div className="Gruppi__page   border-2 flex flex-col items-center justify-center border-red-500">
+    <div className="Gruppi__page  h-screen  flex flex-col items-center justify-center">
 
       {/* Upper div */}
       <div className="upper__div w-64 flex mt-2.5 flex-col items-center justify-center">
@@ -114,7 +121,7 @@ function Gruppi() {
        
         
        
-         return <SinglePermesso key={id} s={buttonPressed}   setDataArray={setDataArray}  title={data.res} />
+         return <SinglePermesso key={id}    setDataArray={setDataArray}  title={data.res} />
         
           
     
