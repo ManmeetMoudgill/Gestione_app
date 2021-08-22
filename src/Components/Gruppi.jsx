@@ -1,8 +1,12 @@
 import { Checkbox } from "@material-ui/core";
 import React,{useEffect,useState} from "react";
 import Header from "./Header";
+import SinglePermesso from "./SinglePermesso";
 function Gruppi() {
     const [dataSelect,setDataSelect]=useState([])
+    const [selectedOption,setSelectedOption]=useState(0);
+    const [permessiData,setPermessiData]=useState([]);
+    const [checked,setChecked]=useState(false);
     useEffect(()=>{
         
         const url="http://localhost/WorkProject/Gruppi.php";
@@ -17,6 +21,29 @@ function Gruppi() {
         }).catch((err)=>console.log(err))
     },[])
 
+    const getPermessi=(e)=>{
+      setSelectedOption(e.target.value)
+      /* console.log(e.target.value) */
+      if(e.target.value==="" || e.target.value===0){
+          alert("Scegli il gruppo");
+      }else{
+        const url=`http://localhost/WorkProject/GetPermessi.php?id_gruppo=${e.target.value}`;
+        fetch(url).then((res)=>{
+          return res.json()
+
+        }).then((data)=>{
+          console.log(data[0])
+          setPermessiData(data[0])
+
+        }).catch((err)=>console.log(err))
+      }
+
+    }
+    
+
+
+    
+
   return (
       <>
       <Header />
@@ -27,7 +54,7 @@ function Gruppi() {
        <label className="text-2xl">Inserisci Nome Gruppo</label>
       
 
-       <select id="select" className="border-2  w-64 mt-2.5 border-black-700" name="groups" id="">
+       <select id="select" value={selectedOption} onChange={getPermessi} className="border-2  w-64 mt-2.5 border-black-700" name="groups" id="">
         <option value="">Scegli il Gruppo</option>
           
       {dataSelect.map((data,id)=>{
@@ -46,9 +73,21 @@ function Gruppi() {
                 <p className=" text-xs">Select all</p>
                 <Checkbox  />
                 </div>
+               
           </div>
+       {permessiData.map((data,id)=>{
+         console.log(data.boolean)
+        
+       
+         return <SinglePermesso key={id} checkedData={data.boolean} title={data.res} />
+        
+          
+    
+        
+       })} 
       </div>
     </div>
+     {/*  {console.log(selectedOption)} */}
     </>
   );
 }
