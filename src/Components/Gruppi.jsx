@@ -76,7 +76,7 @@ function Gruppi() {
                
           </div>
        {permessiData.map((data,id)=>{
-         console.log(data.boolean)
+        
         
        
          return <SinglePermesso key={id} checkedData={data.boolean} title={data.res} />
