@@ -13,24 +13,43 @@ import {createSlice } from '@reduxjs/toolkit';
 export const counterSlice = createSlice({
   name: 'counter',
   initialState:{
-    permessi:true,
+    Permssogruppi:null,
+    PermssoSedi:null,
+    PermessoSondaggio:null,
+    PermessoReport:null
   },
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
   
-    changePermessi:(state,action)=>{
-      state.permessi=action.payload
+    changePermessogruppi:(state,action)=>{
+      state.Permssogruppi=action.payload
+
+    },
+    changePermssoSedi:(state,action)=>{
+      state.PermssoSedi=action.payload;
+
+    },
+    changePermessoSondaggio:(state,action)=>{
+      state.PermessoSondaggio=action.payload;
+
+    },
+    changePermessoReport:(state,action)=>{
+      state.PermessoReport=action.payload;
 
     }
    
-  },
+  }
  
   
 
 });
 
-export const {changePermessi}=counterSlice.actions;
-export const selectpermessi = (state) => state.counter.permessi;
+export const {changePermessogruppi,changePermssoSedi,changePermessoSondaggio,changePermessoReport}=counterSlice.actions;
+export const selectPermssogruppi = (state) => state.counter.Permssogruppi;
+export const selectPermssoSedi = (state) => state.counter.PermssoSedi;
+export const selectPermessoSondaggio = (state) => state.counter.PermessoSondaggio;
+export const selectPermessoReport = (state) => state.counter.PermessoReport;
+
 
 
 

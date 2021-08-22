@@ -1,112 +1,46 @@
 import { Checkbox} from '@material-ui/core'
 import React,{useState} from 'react'
-import selectpermessi from '../features/counterSlice';
-import changePermessi from '../features/counterSlice';
+import {changePermessogruppi,changePermssoSedi,changePermessoSondaggio,changePermessoReport} from '../features/counterSlice';
+import {selectPermssogruppi} from '../features/counterSlice';
+import {selectPermssoSedi} from '../features/counterSlice';
+import {selectPermessoSondaggio} from '../features/counterSlice';
+import {selectPermessoReport} from '../features/counterSlice';
+
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-function SinglePermesso({title,setDataArray}) {
+function SinglePermesso({title}) {
+
+
+        /*Redux Data here  */
+        const gruppi=useSelector(selectPermssogruppi);
+        const sedi=useSelector(selectPermssoSedi);
+        const Asl=useSelector(selectPermessoSondaggio);
+        const report=useSelector(selectPermessoReport);
+
+        /* Dispatch */
+        const dispatch=useDispatch();
+
     /*     const [checked,setChecked]=useState(false) */
     const [getDataChecked,setDataChecked]=useState(false);
     const [permessiSend,setSendPermessi]=useState({})
-    const [countgruppi,setCount]=useState(0);
-   
+  
+  
+   /*  const [gruppo,setGruppo]=useState({});
+ 
+    const [sondaggio,setSondaggio]=useState({});
+    const [analizza,setAnalizza]=useState({}); */
+    const [arrayData,setArrayData]=useState([]);
+    
 
     
-   /*  const permessiRedux=useSelector(selectpermessi);
-    console.log(permessiRedux) 
-    const dispatch=useDispatch(); */
 
-/* 
-    useEffect(()=>{
-        
-        if(selectedAll===true){
-       
-            console.log("Inside the")
-            setDataChecked(()=>{
-                return true
-            })
-          
-       
-          
-         }else{
-
-             setDataChecked(()=>{
-                
-                 if(checkedData==1){
-                    
-                        return true;
-                 }else if(checkedData==0){
-                     console.log("Not Selected")
-                     return false;
-                 }else{
-
-                     return false;
-                 }
-             }) 
-          
-         }
-
-    },[checkedData,selectedAll]) */
-     
-    const changeChecked=(e)=>{
-        console.log(e.target.checked)
-       
-     
-      
-        
+    const changeChecked=(title)=>{
         setDataChecked((pre)=>{
             if(pre===false){
-                setSendPermessi(()=>{
-                    return {
-                      
-                            title:title,
-                            checked:true
-                    }
-                })
-                 setDataArray((pre)=>{
-                 console.log()
-                       return  [
-                         ...pre,
-                          
-                           {
-                               title:title,
-                               checked:true
-                       }
-                     ]
-                    
-
-                   
-   
-                        
-
-                    
-                })
+            
                 return true
             }else if(pre===true){
-                setSendPermessi(()=>{
-                    return {
-                            title:title,
-                            checked:false
-                    }
-                })
-               setDataArray((pre)=>{
-                console.log(pre)
-                    
-                    
-                        return  [
-                            ...pre,
-                            {
-
-                                title:title,
-                                checked:false
-                        }
-                      ]
-               
-               
-
-                    
-                })
 
                 return false
             }
@@ -114,19 +48,102 @@ function SinglePermesso({title,setDataArray}) {
             
             
         })
-       
-       
-       
-
+        
+        if(title=="Creare Gruppi"){
+            if(getDataChecked===false){
+                dispatch(changePermessogruppi({
+                    title:title,
+                    checked:true
+                }))
+             
+            }else if(getDataChecked===true){
+                dispatch(changePermessogruppi({
+                    title:title,
+                    checked:false
+                }))
+           
+               
+            }else{
+                dispatch(changePermessogruppi({
+                    title:title,
+                    checked:false
+                }))
+              
+            }
+        }else if(title=="Creare Sedi"){
+            if(getDataChecked===true){
+                dispatch(changePermssoSedi({
+                    title:title,
+                    checked:false
+                }))
+             
+            }else if(getDataChecked===false){
+                dispatch(changePermssoSedi({
+                    title:title,
+                    checked:true
+                }))
+             
+            }else{
+                dispatch(changePermssoSedi({
+                    title:title,
+                    checked:false
+                }))
+              
+            }
+        }
+        else if(title=="Creare Sondaggio"){
+            if(getDataChecked===true){
+                dispatch(changePermessoSondaggio({
+                    title:title,
+                    checked:false
+                }))
+               
+            }else if(getDataChecked===false){
+                dispatch(changePermessoSondaggio({
+                    title:title,
+                    checked:true
+                }))
+               
+            }else{
+                dispatch(changePermessoSondaggio({
+                    title:title,
+                    checked:false
+                }))
+              
+            }
+        }else if(title=="Analizza Report"){
+            if(getDataChecked==true){
+                dispatch(changePermessoReport({
+                    title:title,
+                        checked:false
+                }))
+               
+            }else if(getDataChecked==false){
+                dispatch(changePermessoReport({
+                    title:title,
+                     checked:true
+                }))
+              
+            
+            }else{
+                dispatch(changePermessoReport({
+                    title:title,
+                        checked:false
+                }))
+              
+            }  
+        }
         
 
     }
+     
+    
     return (
         <div  className="ml-2.5 flex items-center justify-between w-60">
            
         <h3 className="text-xl" >{title}</h3>
-        <Checkbox  checked={getDataChecked} onChange={changeChecked}/>
-      
+        <Checkbox  checked={getDataChecked} onChange={()=>changeChecked(title)}/>
+     
         </div>
     )
 }
