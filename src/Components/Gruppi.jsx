@@ -7,6 +7,8 @@ function Gruppi() {
     const [selectedOption,setSelectedOption]=useState(0);
     const [permessiData,setPermessiData]=useState([]);
     const [selectedAll,setSelectedAll]=useState(false);
+    const [dataArray,setDataArray]=useState([])
+   
     
     useEffect(()=>{
         
@@ -23,8 +25,8 @@ function Gruppi() {
     },[])
 
 
-    const sendPermessi=(data)=>{
-      console.log(data)
+    const sendData=()=>{
+      console.log(dataArray)
 
     }
 
@@ -40,7 +42,7 @@ function Gruppi() {
           return res.json()
 
         }).then((data)=>{
-          console.log(data[0])
+        
           setPermessiData(data[0])
 
         }).catch((err)=>console.log(err))
@@ -48,6 +50,8 @@ function Gruppi() {
      
 
     }
+
+   
     
 
     const changeSetAll=()=>{
@@ -98,7 +102,7 @@ function Gruppi() {
         
         
        
-         return <SinglePermesso key={id} sendPermessi={sendPermessi} selectedAll={selectedAll} checkedData={data.boolean} title={data.res} />
+         return <SinglePermesso key={id}  setDataArray={setDataArray}  title={data.res} />
         
           
     
@@ -106,9 +110,10 @@ function Gruppi() {
        })} 
       </div>
       <div className="flex w-60 justify-end mt-2.5">
-        <Button className="text-white !important bg-purple-700 !important">Save</Button>
+        <Button onClick={sendData} className="text-white !important bg-purple-700 !important">Save</Button>
       </div>
     </div>
+  
      {/*  {console.log(selectedOption)} */}
     </>
   );
