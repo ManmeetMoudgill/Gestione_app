@@ -13,7 +13,7 @@ import {createSlice } from '@reduxjs/toolkit';
 export const counterSlice = createSlice({
   name: 'counter',
   initialState:{
-    permessi:null,
+    permessi:true,
   },
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -30,7 +30,7 @@ export const counterSlice = createSlice({
 });
 
 export const {changePermessi}=counterSlice.actions;
-export const selectPermessi = (state) => state.permessi.value;
+export const selectpermessi = (state) => state.counter.permessi;
 
 
 

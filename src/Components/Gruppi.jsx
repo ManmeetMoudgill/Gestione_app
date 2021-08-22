@@ -7,6 +7,7 @@ function Gruppi() {
     const [selectedOption,setSelectedOption]=useState(0);
     const [permessiData,setPermessiData]=useState([]);
     const [selectedAll,setSelectedAll]=useState(false);
+    
     useEffect(()=>{
         
         const url="http://localhost/WorkProject/Gruppi.php";
@@ -21,7 +22,14 @@ function Gruppi() {
         }).catch((err)=>console.log(err))
     },[])
 
+
+    const sendPermessi=(data)=>{
+      console.log(data)
+
+    }
+
     const getPermessi=(e)=>{
+      
       setSelectedOption(e.target.value)
       /* console.log(e.target.value) */
       if(e.target.value==="" || e.target.value===0){
@@ -37,6 +45,7 @@ function Gruppi() {
 
         }).catch((err)=>console.log(err))
       }
+     
 
     }
     
@@ -89,7 +98,7 @@ function Gruppi() {
         
         
        
-         return <SinglePermesso key={id} selectedAll={selectedAll} checkedData={data.boolean} title={data.res} />
+         return <SinglePermesso key={id} sendPermessi={sendPermessi} selectedAll={selectedAll} checkedData={data.boolean} title={data.res} />
         
           
     
